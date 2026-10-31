@@ -1,17 +1,10 @@
 # CBN Sierra Leone — Lite Website
 
-A **completely separate, self-contained site**. The same design as the full project, with
-**no database and no admin panel**. Every page is plain, hand-editable HTML. The only "live"
-feature is the **Donate** page, which takes real payments through **Monime** (Orange Money,
-Africell Money, cards) and emails a receipt from `cbnetwork.sierraleone@gmail.com`.
-
-Nothing in this folder references the full project — you can copy or move `static-site/`
-anywhere on its own (rename it to whatever you like) and it runs unchanged.
+A **completely separate, self-contained site**. A static site with **No database and No admin panel**
 
 ## Run it
 
 ```bash
-cd static-site
 python3 server.py          # → http://127.0.0.1:8000/
 ```
 
