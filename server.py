@@ -42,6 +42,11 @@ from datetime import datetime
 from email.message import EmailMessage
 from email.utils import formataddr, formatdate, make_msgid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from dotenv import load_dotenv
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(ROOT, "cbn.env"))
+
 
 # =====================================================================
 #  CONFIGURATION  — everything is hard-coded here, as requested.
@@ -50,6 +55,22 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 # =====================================================================
 HOST = os.environ.get("CBN_HOST", "127.0.0.1")
 PORT = int(os.environ.get("CBN_PORT", "8000"))
+
+# Monime / email settings live in the env file and are exposed here as Python
+# names for the rest of the app.
+MONIME_SPACE_ID       = os.environ.get("MONIME_SPACE_ID", "")
+MONIME_ACCESS_TOKEN   = os.environ.get("MONIME_ACCESS_TOKEN", "")
+MONIME_WEBHOOK_SECRET = os.environ.get("MONIME_WEBHOOK_SECRET", "")
+MONIME_MODE           = os.environ.get("MONIME_MODE", "test")
+MONIME_API            = os.environ.get("MONIME_API", "https://api.monime.io")
+MONIME_VERSION        = os.environ.get("MONIME_VERSION", "caph.2025-08-23")
+SMTP_HOST             = os.environ.get("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT             = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_USER             = os.environ.get("SMTP_USER", "")
+SMTP_PASS             = os.environ.get("SMTP_PASS", "")
+FROM_NAME             = os.environ.get("FROM_NAME", "CBN Sierra Leone")
+OFFICE_EMAIL          = os.environ.get("OFFICE_EMAIL", SMTP_USER)
+PUBLIC_BASE_URL       = os.environ.get("PUBLIC_BASE_URL", "")
 
 # Public https:// address of the site once deployed (used for Monime's return
 # links and the webhook). Leave "" while testing locally — the address in the
@@ -77,7 +98,6 @@ ORANGE_PREFIXES   = ("72", "73", "74", "75", "76", "77", "78", "79")
 AFRICELL_PREFIXES = ("30", "31", "32", "33", "34", "77", "88", "99")
 # =====================================================================
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
 RECEIPT_LOG = os.path.join(ROOT, "receipts-sent.txt")   # one reference per line — stops duplicate receipts
 ALLOWED_EXT = {".html", ".css", ".js", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico", ".webp", ".woff", ".woff2"}
 SECURITY_HEADERS = [
