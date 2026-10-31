@@ -1,0 +1,126 @@
+<!-- SHARED SITE HEADER — edit once, server.py inserts it into every page.
+     The current page's nav link gets class="active" automatically. -->
+<header class="site-header">
+
+  <div class="utility-bar">
+    <div class="container">
+      <a href="contact.html" class="util-contact">Contact Us</a>
+      <div class="lang-switcher" aria-label="Language selector">
+        <span class="lang-label">🌐</span>
+        <button class="lang-btn active" data-lang="EN" aria-pressed="true" title="English">EN</button>
+        <button class="lang-btn" data-lang="KR" aria-pressed="false" title="Krio">KR</button>
+        <button class="lang-btn" data-lang="FR" aria-pressed="false" title="Français">FR</button>
+      </div>
+      <button class="util-search-btn" id="searchToggle" aria-label="Open search (Ctrl+K)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <span>Search</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="main-nav" aria-label="Primary">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="CBN Home">
+        <span class="brand-mark">CBN</span>
+        <span class="brand-text">
+          <span class="brand-name">Community Builders Network</span>
+          <span class="brand-tag">Sierra Leone</span>
+        </span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-list">
+        <li><a href="index.html" data-nav="index">Home</a></li>
+
+        <li class="has-mega">
+          <a href="about.html" data-nav="about">About Us <span class="caret">▾</span></a>
+          <div class="mega"><div class="container mega-grid">
+            <div class="mega-feature">
+              <img src="https://images.pexels.com/photos/15538205/pexels-photo-15538205.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600" alt="Community" />
+              <div class="mf-body"><span class="mf-tag">Our Story</span><h5>15 Years Rebuilding Sierra Leone</h5><p>How CBN turns local action into lasting change.</p></div>
+            </div>
+            <div><h4>Who We Are</h4><ul>
+              <li><a href="about.html#mission">Mission &amp; Vision</a></li>
+              <li><a href="about.html#team">Our Team</a></li>
+              <li><a href="about.html#history">History &amp; Achievements</a></li>
+              <li><a href="about.html#values">Core Values</a></li>
+              <li><a href="about.html#partners">Our Partners</a></li>
+            </ul></div>
+            <div><h4>Transparency</h4><ul>
+              <li><a href="contact.html?subject=Request%20for%20annual%20report">Annual Reports</a></li>
+              <li><a href="contact.html?subject=Financial%20accountability%20enquiry">Financial Accountability</a></li>
+            </ul></div>
+          </div></div>
+        </li>
+
+        <li class="has-mega">
+          <a href="projects.html" data-nav="projects">Projects <span class="caret">▾</span></a>
+          <div class="mega"><div class="container mega-grid">
+            <div class="mega-feature">
+              <img src="https://images.pexels.com/photos/19879046/pexels-photo-19879046.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600" alt="Water project" />
+              <div class="mf-body"><span class="mf-tag">Featured</span><h5>Clean Water for Kono District</h5><p>Bringing safe drinking water to 12 rural villages.</p></div>
+            </div>
+            <div><h4>Our Work</h4><ul>
+              <li><a href="projects.html#current">Current Projects</a></li>
+              <li><a href="projects.html#past">Past Projects</a></li>
+              <li><a href="projects.html#stories">Project Impact Stories</a></li>
+            </ul></div>
+            <div><h4>Read the Articles</h4><ul>
+              <li><a href="projects/safe-water-kono-district.html">Safe Water for Kono</a></li>
+              <li><a href="projects/girls-education-initiative.html">Girls' Education</a></li>
+              <li><a href="projects/womens-farming-cooperatives.html">Women's Farming Cooperatives</a></li>
+              <li><a href="projects/youth-vocational-skills-programme.html">Youth Vocational Skills</a></li>
+            </ul></div>
+          </div></div>
+        </li>
+
+        <li class="has-mega">
+          <a href="get-involved.html" data-nav="get-involved">Get Involved <span class="caret">▾</span></a>
+          <div class="mega"><div class="container mega-grid">
+            <div class="mega-feature">
+              <img src="https://images.pexels.com/photos/6646852/pexels-photo-6646852.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600" alt="Volunteer" />
+              <div class="mf-body"><span class="mf-tag">Join Us</span><h5>Become a Volunteer</h5><p>Give your time and skills to Sierra Leonean communities.</p></div>
+            </div>
+            <div><h4>Take Action</h4><ul>
+              <li><a href="get-involved.html#volunteer">Volunteer</a></li>
+              <li><a href="get-involved.html#partner">Partner with Us</a></li>
+              <li><a href="get-involved.html#partner">Corporate Sponsorship</a></li>
+            </ul></div>
+            <div><h4>Ways to Give</h4><ul>
+              <li><a href="donate.html">Donate Online</a></li>
+              <li><a href="donate.html?project=girls-education-initiative">Sponsor a Girl's Education</a></li>
+              <li><a href="donate.html?project=safe-water-kono-district">Fund Clean Water</a></li>
+              <li><a href="contact.html?subject=In-kind%20support">In-kind Support</a></li>
+            </ul></div>
+          </div></div>
+        </li>
+
+        <li class="has-mega">
+          <a href="news.html" data-nav="news">News &amp; Updates <span class="caret">▾</span></a>
+          <div class="mega"><div class="container mega-grid">
+            <div class="mega-feature">
+              <img src="https://images.pexels.com/photos/26855714/pexels-photo-26855714.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=400&w=600" alt="Latest story" />
+              <div class="mf-body"><span class="mf-tag">Latest</span><h5><a href="blog/youth-skills-programme-bo.html" style="color:inherit;text-decoration:none;">Youth Skills Programme Launches in Bo</a></h5><p>300 young Sierra Leoneans will receive vocational training in 2026.</p></div>
+            </div>
+            <div><h4>Stay Informed</h4><ul>
+              <li><a href="news.html#blog">Blog</a></li>
+              <li><a href="news.html#events">Events</a></li>
+              <li><a href="news.html#stories">Success Stories</a></li>
+            </ul></div>
+            <div><h4>Latest Posts</h4><ul>
+              <li><a href="blog/youth-skills-programme-bo.html">Youth Skills Programme in Bo</a></li>
+              <li><a href="blog/boreholes-kono.html">24 Boreholes for Kono</a></li>
+              <li><a href="blog/locally-led-development.html">Locally-Led Development</a></li>
+              <li><a href="news.html#newsletter">Newsletter</a></li>
+            </ul></div>
+          </div></div>
+        </li>
+
+        <li><a href="contact.html" data-nav="contact">Contact</a></li>
+        <li><a href="donate.html" class="nav-cta" data-nav="donate">Donate</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

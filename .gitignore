@@ -1,0 +1,10 @@
+# server.py contains the Monime access token and the Gmail App Password.
+# If you ever put this site in git, keep the repository PRIVATE — or move
+# the secrets to environment variables first.
+receipts-sent.txt
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*.env
+

@@ -1,0 +1,95 @@
+/* ============================================================
+   article.css — layout for the hard-coded project & blog articles
+   (used by /projects/*.html and /blog/*.html; styles.css is loaded first)
+   ============================================================ */
+.art-breadcrumb { background:#f7f8fa; border-bottom:1px solid #eef1f5; padding:12px 0; font-size:.85rem; color:#6b7280; }
+.art-breadcrumb a { color:#f36f21; text-decoration:none; }
+.art-breadcrumb a:hover { text-decoration:underline; }
+
+.art-hero {
+  min-height:420px; display:flex; align-items:flex-end; color:#fff;
+  background-size:cover; background-position:center; background-repeat:no-repeat;
+}
+.art-hero-inner { width:100%; max-width:1200px; margin:0 auto; padding:0 20px 44px; }
+.art-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff;
+  padding:6px 14px; border-radius:40px; font-size:.78rem; font-weight:700;
+  letter-spacing:1.2px; text-transform:uppercase; margin-bottom:16px;
+}
+.art-badge .dot { width:8px; height:8px; border-radius:50%; background:#6b7280; display:inline-block; }
+.art-badge .dot.active { background:#16a34a; }
+.art-cat {
+  display:inline-block; background:#f36f21; color:#fff; font-size:.72rem; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; padding:6px 12px; border-radius:3px; margin-bottom:16px;
+}
+.art-hero h1 { color:#fff; font-size:clamp(1.8rem,4vw,3rem); line-height:1.2; max-width:860px; margin-bottom:16px; }
+.art-meta { display:flex; flex-wrap:wrap; gap:22px; color:#e2e8f0; font-size:.85rem; letter-spacing:.5px; }
+.art-meta strong { color:#fff; }
+
+.art-meta-bar { background:#fff; border-top:4px solid #f36f21; padding:18px 0; }
+.art-meta-inner { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; flex-wrap:wrap; gap:28px; }
+.art-meta-item { display:flex; flex-direction:column; }
+.art-meta-item .label { font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#6b7280; }
+.art-meta-item .value { font-size:.95rem; font-weight:700; color:#0a2a4a; margin-top:2px; }
+
+.art-layout {
+  max-width:1200px; margin:0 auto; padding:48px 20px;
+  display:grid; grid-template-columns:1fr 320px; gap:56px; align-items:flex-start;
+}
+.art-lead { font-size:1.12rem; color:#374151; line-height:1.8; border-bottom:1px solid #eef1f5; padding-bottom:24px; margin-bottom:28px; }
+.art-body h2 { color:#0a2a4a; font-size:1.5rem; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid #eef1f5; }
+.art-body h3 { color:#0a2a4a; font-size:1.15rem; margin:24px 0 10px; }
+.art-body p  { color:#374151; line-height:1.85; margin-bottom:18px; font-size:1.02rem; }
+.art-body ul, .art-body ol { margin:0 0 18px 22px; }
+.art-body li { color:#374151; line-height:1.7; margin-bottom:8px; }
+.art-body blockquote {
+  margin:28px 0; padding:20px 28px; background:#f7f8fa; border-left:4px solid #f36f21;
+  border-radius:0 6px 6px 0; font-style:italic; font-size:1.05rem; color:#374151; line-height:1.7;
+}
+.art-body blockquote footer { font-size:.85rem; color:#6b7280; font-style:normal; margin-top:8px; }
+.art-author { display:flex; align-items:center; gap:14px; margin-top:40px; padding-top:24px; border-top:2px solid #eef1f5; }
+.art-author .av { width:52px; height:52px; border-radius:50%; flex-shrink:0; display:grid; place-items:center;
+                  background:linear-gradient(135deg,#f36f21,#f7b500); color:#fff; font-weight:800; }
+.art-author small { display:block; color:#6b7280; font-size:.78rem; text-transform:uppercase; letter-spacing:1.2px; }
+.art-author strong { color:#0a2a4a; }
+
+.art-sidebar { position:sticky; top:130px; }
+.sidebar-card { background:#fff; border:1px solid #dfe4ec; border-radius:6px; overflow:hidden; margin-bottom:22px; }
+.sidebar-card .sc-head { background:#0a2a4a; color:#fff; padding:12px 18px; font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; }
+.sidebar-card .sc-body { padding:18px; }
+.sidebar-card .sc-body p { color:#374151; font-size:.92rem; line-height:1.6; margin-bottom:14px; }
+.sidebar-card .btn { display:block; text-align:center; width:100%; }
+.art-stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:16px 18px 0; }
+.art-stat { background:#f7f8fa; border-radius:5px; padding:12px; text-align:center; }
+.art-stat .n { font-size:1.4rem; font-weight:800; color:#f36f21; line-height:1; }
+.art-stat .l { font-size:.68rem; color:#6b7280; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+.art-funding { padding:16px 18px; }
+.art-funding-label { display:flex; justify-content:space-between; font-size:.82rem; color:#374151; margin-bottom:8px; }
+.art-bar { height:8px; background:#dfe4ec; border-radius:4px; overflow:hidden; }
+.art-bar-fill { height:100%; background:linear-gradient(90deg,#f36f21,#f7b500); border-radius:4px; }
+.art-back { display:flex; align-items:center; gap:8px; color:#0a2a4a; font-weight:700; font-size:.88rem; text-decoration:none; }
+
+.related-section { border-top:2px solid #eef1f5; padding-top:36px; margin-top:40px; }
+.related-section h3 { color:#0a2a4a; font-size:1.25rem; margin-bottom:20px; }
+.related-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.rel-card { border-radius:6px; overflow:hidden; border:1px solid #dfe4ec; background:#fff; text-decoration:none;
+            display:flex; flex-direction:column; transition:transform .2s, box-shadow .2s; }
+.rel-card:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.1); text-decoration:none; }
+.rel-img { height:130px; background-size:cover; background-position:center; position:relative; }
+.rel-cat { position:absolute; top:10px; left:10px; background:#f36f21; color:#fff; font-size:.65rem; font-weight:700;
+           letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border-radius:3px; }
+.rel-body { padding:12px 14px; }
+.rel-body h4 { color:#0a2a4a; font-size:.95rem; margin-bottom:4px; }
+.rel-body span { color:#6b7280; font-size:.8rem; }
+
+@media (max-width:900px) {
+  .art-layout { grid-template-columns:1fr; gap:30px; }
+  .art-sidebar { position:static; }
+  .related-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:560px) {
+  .art-hero { min-height:320px; }
+  .related-grid { grid-template-columns:1fr; }
+  .art-meta-inner { gap:16px; }
+}
