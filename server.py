@@ -41,7 +41,7 @@ from collections import defaultdict, deque
 from datetime import datetime
 from email.message import EmailMessage
 from email.utils import formataddr, formatdate, make_msgid
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import HTTPServer, BaseHTTPRequestHandler, ThreadingHTTPServer
 from dotenv import load_dotenv
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -53,8 +53,10 @@ load_dotenv(os.path.join(ROOT, "cbn.env"))
 #  ⚠  This file contains secrets. Keep the static-site folder private
 #     (never upload server.py to a public GitHub repo).
 # =====================================================================
-HOST = os.environ.get("CBN_HOST", "127.0.0.1")
-PORT = int(os.environ.get("CBN_PORT", "8000"))
+# Render provides a dynamic PORT and expects the app to bind to all interfaces.
+HOST = os.environ.get("HOST") or os.environ.get("CBN_HOST") or "0.0.0.0"
+PORT = int(os.environ.get("PORT") or os.environ.get("CBN_PORT") or "8000")
+
 
 # Monime / email settings live in the env file and are exposed here as Python
 # names for the rest of the app.
