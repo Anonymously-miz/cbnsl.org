@@ -123,11 +123,11 @@
           <div class="form-group">
             <label>Amount (Sierra Leonean Leones)</label>
             <div class="amount-grid">
-              <button type="button" class="amount-btn" data-amount="50000">Le 50,000</button>
-              <button type="button" class="amount-btn" data-amount="100000">Le 100,000</button>
-              <button type="button" class="amount-btn selected" data-amount="250000">Le 250,000</button>
-              <button type="button" class="amount-btn" data-amount="500000">Le 500,000</button>
-              <button type="button" class="amount-btn" data-amount="1000000">Le 1,000,000</button>
+              <button type="button" class="amount-btn" data-amount="50000">SLE 50</button>
+              <button type="button" class="amount-btn" data-amount="100000">SLE 100</button>
+              <button type="button" class="amount-btn selected" data-amount="250000">SLE 250</button>
+              <button type="button" class="amount-btn" data-amount="500000">SLE 500</button>
+              <button type="button" class="amount-btn" data-amount="1000000">SLE 1,000</button>
               <button type="button" class="amount-btn" data-amount="custom">Custom</button>
             </div>
             <input type="number" id="amountInput" name="amount" value="250000" min="5000" max="100000000" placeholder="Enter amount in Leones">
@@ -176,7 +176,7 @@
             </ul>
             <div class="ussd">
               <div>Orange Money · CBN-SL Donation</div><div>─────────────────────</div>
-              <div>Amount: <span class="hl" id="omUssdAmt">Le 250,000</span></div>
+              <div>Amount: <span class="hl" id="omUssdAmt">SLE 250</span></div>
               <div>From: <span class="hl" id="omUssdPhone">+232 ── ─── ───</span></div>
               <div>─────────────────────</div><div>Enter PIN to confirm ▌</div>
             </div>
@@ -202,7 +202,7 @@
             </ul>
             <div class="ussd purple">
               <div>Africell Money · CBN-SL Donation</div><div>─────────────────────</div>
-              <div>Amount: <span class="hl" id="amUssdAmt">Le 250,000</span></div>
+              <div>Amount: <span class="hl" id="amUssdAmt">SLE 250</span></div>
               <div>From: <span class="hl" id="amUssdPhone">+232 ── ─── ───</span></div>
               <div>─────────────────────</div><div>Enter PIN to confirm ▌</div>
             </div>
@@ -244,7 +244,7 @@
             </label>
           </div>
 
-          <button type="submit" class="btn btn-primary" id="donateBtn" style="width:100%;padding:16px;font-size:1rem;letter-spacing:1px;">🟠 Donate via Orange Money — Le 250,000</button>
+          <button type="submit" class="btn btn-primary" id="donateBtn" style="width:100%;padding:16px;font-size:1rem;letter-spacing:1px;">🟠 Donate via Orange Money — SLE 250</button>
           <div id="formError" role="alert" aria-live="polite"></div>
 
           <div class="security-badges">
@@ -260,13 +260,13 @@
           <div class="i-card">
             <div class="i-head">What Your Donation Does</div>
             <div class="i-body">
-              <div class="impact-row"><span class="amt">Le 50k</span><span class="desc">School stationery for one girl for a term</span></div>
-              <div class="impact-row"><span class="amt">Le 100k</span><span class="desc">One week of a community health worker's stipend</span></div>
-              <div class="impact-row"><span class="amt">Le 250k</span><span class="desc">Seeds a village kitchen garden with improved varieties</span></div>
-              <div class="impact-row"><span class="amt">Le 500k</span><span class="desc">One girl's full secondary school fees for a term</span></div>
-              <div class="impact-row"><span class="amt">Le 1M</span><span class="desc">Trains one community health worker for 12 weeks</span></div>
-              <div class="impact-row"><span class="amt">Le 5M</span><span class="desc">Spare parts to keep a borehole pumping for a year</span></div>
-              <div class="impact-row"><span class="amt">Le 20M</span><span class="desc">Drills and commissions one solar-powered village borehole</span></div>
+              <div class="impact-row"><span class="amt">SLE 50</span><span class="desc">School stationery for one girl for a term</span></div>
+              <div class="impact-row"><span class="amt">SLE 100</span><span class="desc">One week of a community health worker's stipend</span></div>
+              <div class="impact-row"><span class="amt">SLE 250</span><span class="desc">Seeds a village kitchen garden with improved varieties</span></div>
+              <div class="impact-row"><span class="amt">SLE 500</span><span class="desc">One girl's full secondary school fees for a term</span></div>
+              <div class="impact-row"><span class="amt">SLE 1,000</span><span class="desc">Trains one community health worker for 12 weeks</span></div>
+              <div class="impact-row"><span class="amt">SLE 5,000</span><span class="desc">Spare parts to keep a borehole pumping for a year</span></div>
+              <div class="impact-row"><span class="amt">SLE 20,000</span><span class="desc">Drills and commissions one solar-powered village borehole</span></div>
             </div>
           </div>
           <div class="i-card">
@@ -328,7 +328,7 @@
   (function () {
     'use strict';
     var $ = function (id) { return document.getElementById(id); };
-    var fmt   = function (n) { return 'Le ' + Number(n || 0).toLocaleString('en-GB'); };
+    var fmt   = function (n) { return 'SLE ' + (Number(n || 0) / 1000).toLocaleString('en-GB', { maximumFractionDigits: 0 }); };
     var toSLE = function (n) { return 'SLE ' + (Number(n || 0) / 1000).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
     var impact = function (n) {
       if (n < 100000) return 'school stationery for one child';
@@ -421,7 +421,11 @@
 
     /* ── project pre-selection from ?project= (used by article pages) ── */
     var qsInit = new URLSearchParams(location.search), pre = qsInit.get('project');
-    if (pre && $('projectDesig').querySelector('option[value="' + pre + '"]')) $('projectDesig').value = pre;
+    var projectSelect = $('projectDesig');
+    if (pre && projectSelect) {
+      var projectOption = projectSelect.querySelector('option[value="' + pre + '"]');
+      if (projectOption) projectSelect.value = pre;
+    }
 
     /* ── errors & modal ── */
     function showError(m) { var e = $('formError'); e.textContent = '⚠ ' + m; e.style.display = 'block'; e.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
@@ -447,13 +451,20 @@
       Object.keys(METHODS).forEach(function (k) { if (k !== method) $(METHODS[k].field).setCustomValidity(''); });
       if (!this.checkValidity()) { this.reportValidity(); return; }
       var amount = parseInt(amountInput.value, 10) || 0;
-      if (amount < 5000) { showError('Minimum donation is Le 5,000.'); amountInput.focus(); return; }
+      if (amount < 5000) { showError('Minimum donation is SLE 5.'); amountInput.focus(); return; }
       var specific = METHODS[method].check(true);
       if (!specific) { showError(method === 'card' ? 'Please enter the cardholder name.' : 'Please enter a valid mobile money number for the selected operator.'); $(METHODS[method].field).focus(); return; }
 
       var email = $('d-email').value.trim();
-      var payload = { amount: amount, first_name: $('d-first').value.trim(), last_name: $('d-last').value.trim(), email: email,
-                      method: method, project: $('projectDesig').value, website: $('hp').value };
+      var payload = {
+        amount: amount,
+        first_name: $('d-first').value.trim(),
+        last_name: $('d-last').value.trim(),
+        email: email,
+        method: method,
+        project: projectSelect ? projectSelect.value : '',
+        website: $('hp').value
+      };
       if (method === 'card') payload.card_holder = specific; else payload.phone = specific;
 
       pending('Preparing your secure payment…', 'We are creating your secure Monime checkout for ' + fmt(amount) + '.', '');
