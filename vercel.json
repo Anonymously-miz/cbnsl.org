@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/donate",
+      "destination": "https://cbnsl-org.onrender.com/api/donate"
+    }
+  ]
+}
