@@ -73,12 +73,12 @@ SMTP_PASS             = os.environ.get("SMTP_PASS", "")
 FROM_NAME             = os.environ.get("FROM_NAME", "CBN Sierra Leone")
 OFFICE_EMAIL          = os.environ.get("OFFICE_EMAIL", SMTP_USER)
 PUBLIC_BASE_URL       = os.environ.get("PUBLIC_BASE_URL", "")
-ALLOWED_ORIGINS      = tuple(
+ALLOWED_ORIGINS = tuple(
     origin.strip()
     for origin in os.environ.get(
         "ALLOWED_ORIGINS",
         "http://localhost:3000,http://127.0.0.1:3000,https://localhost:3000,"
-        "https://cbnsl-org.vercel.app,https://cbnsl-org-git-main-*.vercel.app",
+        "https://cbnsl-org.vercel.app,https://cbnsl.org,https://www.cbnsl.org",
     ).split(",")
     if origin.strip()
 )
@@ -586,18 +586,12 @@ class Handler(BaseHTTPRequestHandler):
         origin = self.headers.get("Origin")
         if not origin:
             return []
-        origin_url = urllib.parse.urlparse(origin)
-        origin_host = origin_url.netloc.lower()
-        host = (self.headers.get("Host") or "").lower()
-        if origin_host == host:
-            return [("Access-Control-Allow-Origin", origin), ("Access-Control-Allow-Methods", "GET, POST, OPTIONS"), ("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With"), ("Vary", "Origin")]
-        allowed = {urllib.parse.urlparse(o).netloc.lower() for o in ALLOWED_ORIGINS}
-        if origin_host in allowed:
+        if self.same_origin():
             return [("Access-Control-Allow-Origin", origin), ("Access-Control-Allow-Methods", "GET, POST, OPTIONS"), ("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With"), ("Vary", "Origin")]
         return []
 
     def same_origin(self):
-        """Light CSRF defence: a browser POST from another site carries a foreign Origin."""
+        """Accept the live frontend, Vercel previews, and the custom domain while still blocking other sites."""
         origin = self.headers.get("Origin") or self.headers.get("Referer")
         if not origin:
             return True
@@ -606,8 +600,19 @@ class Handler(BaseHTTPRequestHandler):
         host = (self.headers.get("Host") or "").lower()
         if origin_host == host:
             return True
+
+        origin_name = origin_url.hostname.lower() if origin_url.hostname else ""
         allowed = {urllib.parse.urlparse(o).netloc.lower() for o in ALLOWED_ORIGINS}
-        return origin_host in allowed
+        if origin_host in allowed:
+            return True
+
+        if origin_name.endswith(".vercel.app"):
+            return True
+        if origin_name in {"cbnsl.org", "www.cbnsl.org"}:
+            return True
+        if origin_name.endswith(".cbnsl.org"):
+            return True
+        return False
 
     # --- routing ---
     def do_GET(self):
