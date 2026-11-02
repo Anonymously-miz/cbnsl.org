@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/api/donate",
-      "destination": "https://cbnsl-org.onrender.com/api/donate"
+      "source": "/api/:path*",
+      "destination": "https://cbnsl-org.onrender.com/api/:path*"
+    },
+    {
+      "source": "/donate/return",
+      "destination": "https://cbnsl-org.onrender.com/donate/return"
     }
   ]
 }

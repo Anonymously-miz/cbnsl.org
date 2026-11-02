@@ -73,6 +73,15 @@ SMTP_PASS             = os.environ.get("SMTP_PASS", "")
 FROM_NAME             = os.environ.get("FROM_NAME", "CBN Sierra Leone")
 OFFICE_EMAIL          = os.environ.get("OFFICE_EMAIL", SMTP_USER)
 PUBLIC_BASE_URL       = os.environ.get("PUBLIC_BASE_URL", "")
+ALLOWED_ORIGINS      = tuple(
+    origin.strip()
+    for origin in os.environ.get(
+        "ALLOWED_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000,https://localhost:3000,"
+        "https://cbnsl-org.vercel.app,https://cbnsl-org-git-main-*.vercel.app",
+    ).split(",")
+    if origin.strip()
+)
 
 # Public https:// address of the site once deployed (used for Monime's return
 # links and the webhook). Leave "" while testing locally — the address in the
@@ -529,6 +538,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         for k, v in SECURITY_HEADERS:
             self.send_header(k, v)
+        for k, v in self.cors_headers():
+            self.send_header(k, v)
         for k, v in extra:
             self.send_header(k, v)
         self.end_headers()
@@ -571,12 +582,32 @@ class Handler(BaseHTTPRequestHandler):
                 return {}
         return {k: v[0] for k, v in urllib.parse.parse_qs(raw.decode("utf-8", "replace"), keep_blank_values=True).items()}
 
+    def cors_headers(self):
+        origin = self.headers.get("Origin")
+        if not origin:
+            return []
+        origin_url = urllib.parse.urlparse(origin)
+        origin_host = origin_url.netloc.lower()
+        host = (self.headers.get("Host") or "").lower()
+        if origin_host == host:
+            return [("Access-Control-Allow-Origin", origin), ("Access-Control-Allow-Methods", "GET, POST, OPTIONS"), ("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With"), ("Vary", "Origin")]
+        allowed = {urllib.parse.urlparse(o).netloc.lower() for o in ALLOWED_ORIGINS}
+        if origin_host in allowed:
+            return [("Access-Control-Allow-Origin", origin), ("Access-Control-Allow-Methods", "GET, POST, OPTIONS"), ("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With"), ("Vary", "Origin")]
+        return []
+
     def same_origin(self):
         """Light CSRF defence: a browser POST from another site carries a foreign Origin."""
         origin = self.headers.get("Origin") or self.headers.get("Referer")
         if not origin:
             return True
-        return urllib.parse.urlparse(origin).netloc == self.headers.get("Host")
+        origin_url = urllib.parse.urlparse(origin)
+        origin_host = origin_url.netloc.lower()
+        host = (self.headers.get("Host") or "").lower()
+        if origin_host == host:
+            return True
+        allowed = {urllib.parse.urlparse(o).netloc.lower() for o in ALLOWED_ORIGINS}
+        return origin_host in allowed
 
     # --- routing ---
     def do_GET(self):
@@ -591,6 +622,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_HEAD(self):
         self.do_GET()
+
+    def do_OPTIONS(self):
+        self._send(204, b"", extra=[("Access-Control-Allow-Methods", "GET, POST, OPTIONS"), ("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")])
 
     def do_POST(self):
         path = urllib.parse.urlparse(self.path).path
