@@ -78,7 +78,7 @@ ALLOWED_ORIGINS = tuple(
     for origin in os.environ.get(
         "ALLOWED_ORIGINS",
         "http://localhost:3000,http://127.0.0.1:3000,https://localhost:3000,"
-        "https://cbnsl-org.vercel.app,https://cbnsl.org,https://www.cbnsl.org",
+        "https://cbnslorg.vercel.app,https://cbnsl.org,https://www.cbnsl.org",
     ).split(",")
     if origin.strip()
 )
