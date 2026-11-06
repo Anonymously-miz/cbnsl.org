@@ -5,6 +5,14 @@
       "destination": "https://cbnsl-org.onrender.com/api/:path*"
     },
     {
+      "source": "/api/monime/webhook",
+      "destination": "https://cbnsl-org.onrender.com/api/monime/webhook"
+    },
+    {
+      "source": "/donate",
+      "destination": "/donate.html"
+    },
+    {
       "source": "/donate/return",
       "destination": "https://cbnsl-org.onrender.com/donate/return"
     }
